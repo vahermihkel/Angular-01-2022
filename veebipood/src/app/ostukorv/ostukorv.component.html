@@ -1,1 +1,12 @@
 <p>ostukorv works!</p>
+
+<div *ngFor="let tooteNimi of ['Coca cola', 'Fanta', 'Srpite', 'Vichy', 'Vitamine well']">
+  <div>{{ tooteNimi }}</div>
+  <div>1</div>
+  <div>true</div>
+  <button (click)="onEemaldaOstukorvist()">X</button>
+  <br><br>
+</div>
+
+<!-- onEemaldaOstukorvist() -->
+<!-- parem hiireklõps -> inspect -> console -->
