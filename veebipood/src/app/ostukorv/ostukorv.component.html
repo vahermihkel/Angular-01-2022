@@ -1,12 +1,27 @@
-<p>ostukorv works!</p>
+<!-- <div>{{ toodeNimi }}</div>
+<div>{{ toode1.nimi }}</div>
+<div>{{ toode1.hind }}</div>
+<div>{{ toode1.aktiivne }}</div> -->
 
-<div *ngFor="let tooteNimi of ['Coca cola', 'Fanta', 'Srpite', 'Vichy', 'Vitamine well']">
-  <div>{{ tooteNimi }}</div>
-  <div>1</div>
-  <div>true</div>
-  <button (click)="onEemaldaOstukorvist()">X</button>
-  <br><br>
+<button *ngIf="tooted.length !== 0" (click)="onTyhjendaOstukorv()">Tühjenda ostukorv</button>
+<div *ngIf="tooted.length === 0">Ostukorv on tühi</div>
+
+<br><br>
+
+<div *ngFor="let toode of tooted">
+  <div *ngIf="toode.aktiivne">
+    <div>{{ toode.nimi }}</div>
+    <div>{{ toode.hind }}</div>
+    <div>{{ toode.aktiivne }}</div>
+    <button (click)="onLisaOstukorvi(toode)">+</button>
+    <button (click)="onEemaldaOstukorvist(toode)">X</button>
+    <br><br>
+  </div>
 </div>
+
+<div *ngIf="tooted.length !== 0">Kokku: {{ ostukorviSumma }} € </div>
+
+<!-- onLisaOstukorvi -->
 
 <!-- onEemaldaOstukorvist() -->
 <!-- parem hiireklõps -> inspect -> console -->

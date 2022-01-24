@@ -7,6 +7,7 @@ const routes: Routes = [
   // localhost:4200/  --- avaleht.component.html (+ .css + .ts)
   { path: "", component: AvalehtComponent },
   // localhost:4200/ostukorv  --- ostukorv.component.html (+ .css + .ts)
+  { path: "ostukorvid", redirectTo: "ostukorv" },
   { path: "ostukorv", component: OstukorvComponent },
 ];
 
