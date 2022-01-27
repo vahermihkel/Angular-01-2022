@@ -16,13 +16,7 @@ export class OstukorvComponent implements OnInit {
   // toodeHind2 = 1.5;
   // toodeAktiivne2 = true;
 
-  tooted = [
-    {nimi: 'Coca cola', hind: 1, aktiivne: true}, 
-    {nimi: 'Fanta', hind: 1.5, aktiivne: true}, 
-    {nimi: 'Srpite', hind: 1, aktiivne: true},
-    {nimi: 'Vichy', hind: 2, aktiivne: false}, 
-    {nimi: 'Vitamine well', hind: 2.5, aktiivne: true}
-    ];
+  tooted: any[] = [];
 
   ostukorviSumma = 0;
 
@@ -34,20 +28,22 @@ export class OstukorvComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("mindi OstukorvComponent lehele");
+    const ostukorviTooted = sessionStorage.getItem("ostukorv");
+    if (ostukorviTooted) {
+      this.tooted = JSON.parse(ostukorviTooted);
+    }
     this.arvutaOstukorviSumma();
   }
 
   onTyhjendaOstukorv() {
     this.tooted = [];
+    sessionStorage.setItem("ostukorv", JSON.stringify(this.tooted));
     this.arvutaOstukorviSumma();
   }
 
   onLisaOstukorvi(toode: any) {
-    console.log("lisatud ostukorvi");
-    console.log(toode);
-    console.log(this.tooted);
     this.tooted.push(toode);
-    console.log(this.tooted);
+    sessionStorage.setItem("ostukorv", JSON.stringify(this.tooted));
     this.arvutaOstukorviSumma();
   }
 
@@ -63,6 +59,7 @@ export class OstukorvComponent implements OnInit {
                   //    1,1 --- kustutatakse indexiga 1 kokku 1 element
     this.tooted.splice(j2rjekorraNumber, 1);
     console.log(this.tooted);
+    sessionStorage.setItem("ostukorv", JSON.stringify(this.tooted));
     this.arvutaOstukorviSumma();
   }
 
@@ -78,8 +75,15 @@ export class OstukorvComponent implements OnInit {
     // [].forEach({name: "B", hind: 5} => 7  =  2 + 5  )
     // [].forEach({name: "C", hind: 4}} => 11 =  7 + 4  )
     this.ostukorviSumma = 0;
+    //  *ngFor="let toode of tooted"
+    // tooted.forEach(toode => console.log("toode") )
     this.tooted.forEach(element => this.ostukorviSumma = this.ostukorviSumma + element.hind );
     console.log(this.ostukorviSumma);
+
+    // let uusMuutuja;
+    // const uusMuutuja;
+
+    // <div *ngFor="let element of this.tooted"></div>
   }
 
 }

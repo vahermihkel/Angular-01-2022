@@ -6,16 +6,26 @@ import { AppComponent } from './app.component';
 import { AvalehtComponent } from './avaleht/avaleht.component';
 import { OstukorvComponent } from './ostukorv/ostukorv.component';
 import { MenyyComponent } from './menyy/menyy.component';
+import { AdminKoduComponent } from './admin/admin-kodu/admin-kodu.component';
+import { LisaToodeComponent } from './admin/lisa-toode/lisa-toode.component';
+import { MuudaToodeComponent } from './admin/muuda-toode/muuda-toode.component';
+import { VaataTooteidComponent } from './admin/vaata-tooteid/vaata-tooteid.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     AvalehtComponent,
     OstukorvComponent,
-    MenyyComponent
+    MenyyComponent,
+    AdminKoduComponent,
+    LisaToodeComponent,
+    MuudaToodeComponent,
+    VaataTooteidComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],

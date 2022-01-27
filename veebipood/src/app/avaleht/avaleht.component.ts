@@ -6,6 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./avaleht.component.css']
 })
 export class AvalehtComponent implements OnInit {
+
+  // localStorage/sessionStorage
+  // fail
+  // andmebaas
+
+  tooted = [
+    {nimi: 'Coca cola', hind: 1, aktiivne: true}, 
+    {nimi: 'Fanta', hind: 1.5, aktiivne: true}, 
+    {nimi: 'Srpite', hind: 1, aktiivne: true},
+    {nimi: 'Vichy', hind: 2, aktiivne: false}, 
+    {nimi: 'Vitamine well', hind: 2.5, aktiivne: true}
+    ];
+
   kahendV22rtus = true; // boolean
   kahendV22rtusKaks = false; // boolean
 
@@ -26,11 +39,33 @@ export class AvalehtComponent implements OnInit {
     console.log("HTML käivitub, aga ngOnInit funktsioon läheb käima vahetult enne HTMLi");
   }
 
-  onLisaOstukorvi() {
-    console.log("ostukorvi lisamise funktsionaalsus töötab!");
-    this.kahendV22rtus = !this.kahendV22rtus;
-    this.kahendV22rtusKaks = !this.kahendV22rtusKaks;
-    // this.numbrilineMuutuja = !this.numbrilineMuutuja;
+              // a) "fanta"
+              // b) "sprite"
+  onLisaOstukorvi(toode: any) {
+    // ["coca cola"]
+    // parem klõps -> inspect -> application -> session storage
+    // a) sessionStorageOstukorv = null;
+    // b) sessionStorageOstukorv = "["fanta"]";
+    const sessionStorageOstukorv = sessionStorage.getItem("ostukorv");
+    if (sessionStorageOstukorv) {
+      //1. võta see mis sul juba sessionStorages selle võtme on
+      //2. lisa sinna see toode juurde
+      //3. pane see uuesti sessionStoragesse
+                    //"["fanta"]" -> ["fanta"]
+      const ostukorviTooted = JSON.parse(sessionStorageOstukorv);
+      // ["fanta"].push("sprite")
+      // ["fanta", "sprite"]
+      ostukorviTooted.push(toode);
+                                          //"["fanta", "sprite"]"
+                          // key = ostukorv |  value = "["fanta", "sprite"]"              
+      sessionStorage.setItem("ostukorv", JSON.stringify(ostukorviTooted));
+    } else {
+                                           //           "["fanta"]"
+                      // key = ostukorv |  value = "["fanta"]"
+      sessionStorage.setItem("ostukorv", JSON.stringify([toode]));
+    }
   }
+
+  //10.45
 
 }

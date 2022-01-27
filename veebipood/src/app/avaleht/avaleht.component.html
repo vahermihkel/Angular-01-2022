@@ -3,4 +3,12 @@
 <div *ngIf="kahendV22rtus">{{ s6nalineMuutuja + 321 }}</div>
 <div *ngIf="kahendV22rtusKaks">{{ numbrilineMuutuja + 321 }}</div>
 
-<button class="btn btn-primary" (click)="onLisaOstukorvi()">Lisa ostukorvi</button>
+<div *ngFor="let toode of tooted">
+  <div *ngIf="toode.aktiivne">
+    <div>{{ toode.nimi }}</div>
+    <div>{{ toode.hind }}</div>
+    <div>{{ toode.aktiivne }}</div>
+    <button class="btn btn-primary" (click)="onLisaOstukorvi(toode)">Lisa ostukorvi</button>
+    <br><br>
+  </div>
+</div>
