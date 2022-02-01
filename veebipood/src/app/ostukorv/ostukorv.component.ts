@@ -28,8 +28,10 @@ export class OstukorvComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("mindi OstukorvComponent lehele");
+            //      '[{nimi: "Coca cola", hind: 1, aktiivne: false}]'
     const ostukorviTooted = sessionStorage.getItem("ostukorv");
     if (ostukorviTooted) {
+      //        [{nimi: "Coca cola", hind: 1, aktiivne: false}]
       this.tooted = JSON.parse(ostukorviTooted);
     }
     this.arvutaOstukorviSumma();
@@ -41,8 +43,10 @@ export class OstukorvComponent implements OnInit {
     this.arvutaOstukorviSumma();
   }
 
+          // {nimi: "Fanta", hind: 1, aktiivne: false}
   onLisaOstukorvi(toode: any) {
     this.tooted.push(toode);
+   // '[{nimi: "Coca cola", hind: 1, aktiivne: false},{nimi: "Fanta", hind: 1, aktiivne: false}]'
     sessionStorage.setItem("ostukorv", JSON.stringify(this.tooted));
     this.arvutaOstukorviSumma();
   }

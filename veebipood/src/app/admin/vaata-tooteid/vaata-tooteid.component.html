@@ -1,1 +1,8 @@
-<p>vaata-tooteid works!</p>
+<div *ngFor="let toode of tooted">
+    <div>{{ toode.nimi }}</div>
+    <div>{{ toode.hind }}</div>
+    <div>{{ toode.aktiivne }}</div>
+    <button class="btn btn-primary" (click)="onKustutaToode(toode)">Kustuta</button>
+    <button class="btn btn-primary" routerLink="/admin/muuda">Muuda</button>
+    <br><br>
+</div>

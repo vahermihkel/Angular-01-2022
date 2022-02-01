@@ -37,6 +37,11 @@ export class AvalehtComponent implements OnInit {
     console.log("AvalehtComponent käimaminemise funktsioon -  see läheb");
     console.log("käima siis, kui kasutaja läheb siia componendi peale ja");
     console.log("HTML käivitub, aga ngOnInit funktsioon läheb käima vahetult enne HTMLi");
+    const tootedLocalStoragest = localStorage.getItem("tooted");
+    if (tootedLocalStoragest) {
+      this.tooted = JSON.parse(tootedLocalStoragest);
+      console.log(this.tooted);
+    }
   }
 
               // a) "fanta"
