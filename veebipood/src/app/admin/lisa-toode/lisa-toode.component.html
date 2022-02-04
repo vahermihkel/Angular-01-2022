@@ -1,3 +1,4 @@
+<!-- class="ng-untouched ng-pristine ng-invalid" -->
 <form (ngSubmit)="onLisa(tooteLisamiseVorm)" #tooteLisamiseVorm="ngForm">
   <label>Nimetus</label> <br>
   <input ngModel name="nimi" type="text" required> <br>
@@ -8,3 +9,8 @@
   <input ngModel name="aktiivne" type="checkbox"> <br>
   <button [disabled]="tooteLisamiseVorm.invalid">Lisa toode</button>
 </form>
+
+<!-- name="KEY"
+  JSON objekt
+  {nimi: "mida_sisestati", hind: "", aktiivne: ""}
+-->

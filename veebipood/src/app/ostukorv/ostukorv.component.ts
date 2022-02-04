@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -22,7 +23,7 @@ export class OstukorvComponent implements OnInit {
 
   // JSON kuju
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
     console.log("constructor läheb käima");
   }
 
@@ -88,6 +89,36 @@ export class OstukorvComponent implements OnInit {
     // const uusMuutuja;
 
     // <div *ngFor="let element of this.tooted"></div>
+  }
+
+  mineMaksma() {
+    const makseAndmed = {
+      "api_username": "92ddcfab96e34a5f",
+      "account_name": "EUR3D1",
+      "amount": this.ostukorviSumma,
+      "order_reference": Math.floor(Math.random() * 899999 + 100000),
+      "nonce": "92ddcfab96e34a5f" + Math.floor(Math.random() * 899999 + 100000) + new Date(),
+      "timestamp": new Date(),
+      "customer_url": "https://www.delfi.ee"
+      }
+    const url = "https://igw-demo.every-pay.com/api/v4/payments/oneoff";
+      
+    // let headers = new HttpHeaders();
+    // headers.set("Authorization", "Basic OTJkZGNmYWI5NmUzNGE1Zjo4Y2QxOWU5OWU5YzJjMjA4ZWU1NjNhYmY3ZDBlNGRhZA==");
+ 
+    this.http.post<any>(
+      url,
+      makseAndmed,
+      {headers:
+        new HttpHeaders(
+          {
+            'Authorization': 
+            'Basic OTJkZGNmYWI5NmUzNGE1Zjo4Y2QxOWU5OWU5YzJjMjA4ZWU1NjNhYmY3ZDBlNGRhZA=='
+          }
+        )
+      }
+    ).subscribe(response => window.location.href = response.payment_link );
+    
   }
 
 }

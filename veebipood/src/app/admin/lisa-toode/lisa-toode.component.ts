@@ -27,6 +27,7 @@ export class LisaToodeComponent implements OnInit {
         tooted.push(vorm.value);
         localStorage.setItem("tooted", JSON.stringify(tooted));
       } else {
+                  // [{nim: "", hind: 2}]
         localStorage.setItem("tooted", JSON.stringify([vorm.value]));
       }
     }

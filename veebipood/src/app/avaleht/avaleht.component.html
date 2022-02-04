@@ -5,9 +5,11 @@
 
 <div *ngFor="let toode of tooted">
   <div *ngIf="toode.aktiivne">
-    <div>{{ toode.nimi }}</div>
-    <div>{{ toode.hind }}</div>
-    <div>{{ toode.aktiivne }}</div>
+    <div routerLink="/toode/{{toode.nimi.toLowerCase().replace(' ', '-')}}">
+      <div>{{ toode.nimi }}</div>
+      <div>{{ toode.hind }}</div>
+      <div>{{ toode.aktiivne }}</div>
+    </div>
     <button class="btn btn-primary" (click)="onLisaOstukorvi(toode)">Lisa ostukorvi</button>
     <br><br>
   </div>

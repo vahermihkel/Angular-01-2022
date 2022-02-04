@@ -19,7 +19,10 @@
   </div>
 </div>
 
-<div *ngIf="tooted.length !== 0">Kokku: {{ ostukorviSumma }} € </div>
+<div *ngIf="tooted.length !== 0">
+  <div>Kokku: {{ ostukorviSumma }} €</div> 
+  <button (click)="mineMaksma()">Maksma</button>
+</div>
 
 <!-- onLisaOstukorvi -->
 

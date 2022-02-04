@@ -11,6 +11,8 @@ import { LisaToodeComponent } from './admin/lisa-toode/lisa-toode.component';
 import { MuudaToodeComponent } from './admin/muuda-toode/muuda-toode.component';
 import { VaataTooteidComponent } from './admin/vaata-tooteid/vaata-tooteid.component';
 import { FormsModule } from '@angular/forms';
+import { YksikToodeComponent } from './yksik-toode/yksik-toode.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,14 @@ import { FormsModule } from '@angular/forms';
     AdminKoduComponent,
     LisaToodeComponent,
     MuudaToodeComponent,
-    VaataTooteidComponent
+    VaataTooteidComponent,
+    YksikToodeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
