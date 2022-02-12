@@ -7,14 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class YksikToodeComponent implements OnInit {
 
-  constructor() { }
-
   toode!: any;
+
+  constructor() { }
 
   ngOnInit(): void {
     // .split() ---
     // tükeldab String muutuja (sõnalise)
     // väiksemate stringide massiiviks
+    // "Elas metsas mutionu, keset kuuski".split(" ");
+    // ["Elas", "metsas","mutionu,","keset","kuuski"];
+    // .split("a");
+    // ["El", "s mets", "s mutionu keset kuuski"][1] --> "s mets";
     console.log(window.location.href.split("toode/")[1]);
     const tooteNimi = window.location.href.split("toode/")[1];
 

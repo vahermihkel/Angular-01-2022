@@ -10,7 +10,7 @@ import { AdminKoduComponent } from './admin/admin-kodu/admin-kodu.component';
 import { LisaToodeComponent } from './admin/lisa-toode/lisa-toode.component';
 import { MuudaToodeComponent } from './admin/muuda-toode/muuda-toode.component';
 import { VaataTooteidComponent } from './admin/vaata-tooteid/vaata-tooteid.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YksikToodeComponent } from './yksik-toode/yksik-toode.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule
   ],

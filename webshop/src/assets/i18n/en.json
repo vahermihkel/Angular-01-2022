@@ -1,0 +1,12 @@
+{
+  "home": {
+      "add-cart-button": "Add to cart",
+      "name": "Name"
+  },
+  "navbar": {
+      "admin-button": "To admin view",
+      "cart-button": "Cart",
+      "lang-en": "English",
+      "lang-ee": "Estonian"
+  }
+}

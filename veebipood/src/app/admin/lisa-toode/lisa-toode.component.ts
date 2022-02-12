@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LisaToodeComponent implements OnInit {
 
-  constructor() { }
+  // erinevate failide ühendamiseks selle componendiga
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -21,15 +23,17 @@ export class LisaToodeComponent implements OnInit {
       }
       console.log(vorm.value);
             // [{nimi: 'Mihkel Vaher', hind: 50, aktiivne: ''}]
-      const tootedLocalStoragest = localStorage.getItem("tooted");
-      if (tootedLocalStoragest) { //  !== null kontrollib kas on tühjus või midagi sees
-        const tooted = JSON.parse(tootedLocalStoragest);
-        tooted.push(vorm.value);
-        localStorage.setItem("tooted", JSON.stringify(tooted));
-      } else {
-                  // [{nim: "", hind: 2}]
-        localStorage.setItem("tooted", JSON.stringify([vorm.value]));
-      }
+      // const tootedLocalStoragest = localStorage.getItem("tooted");
+      // if (tootedLocalStoragest) { //  !== null kontrollib kas on tühjus või midagi sees
+      //   const tooted = JSON.parse(tootedLocalStoragest);
+      //   tooted.push(vorm.value);
+      //   localStorage.setItem("tooted", JSON.stringify(tooted));
+      // } else {
+      //             // [{nim: "", hind: 2}]
+      //   localStorage.setItem("tooted", JSON.stringify([vorm.value]));
+      // }
+      this.http.post("https://angular-01-2022-default-rtdb.europe-west1.firebasedatabase.app/tooted.json",
+            vorm.value).subscribe();
     }
   }
 

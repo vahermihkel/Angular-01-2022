@@ -3,6 +3,6 @@
     <div>{{ toode.hind }}</div>
     <div>{{ toode.aktiivne }}</div>
     <button class="btn btn-primary" (click)="onKustutaToode(toode)">Kustuta</button>
-    <button class="btn btn-primary" routerLink="/admin/muuda">Muuda</button>
+    <button class="btn btn-primary" routerLink="/admin/muuda/{{toode.nimi.toLowerCase().replace(' ', '-').replace('õ','o')}}">Muuda</button>
     <br><br>
 </div>

@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: "toode/:tooteNimi", component: YksikToodeComponent },
   { path: "admin", component: AdminKoduComponent },
   { path: "admin/lisa", component: LisaToodeComponent },
-  { path: "admin/muuda", component: MuudaToodeComponent },
+  { path: "admin/muuda/:tooteNimi", component: MuudaToodeComponent },
   { path: "admin/esemed", component: VaataTooteidComponent },
 ];
 

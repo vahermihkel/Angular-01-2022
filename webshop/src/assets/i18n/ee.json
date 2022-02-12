@@ -1,0 +1,12 @@
+{
+  "home": {
+      "add-cart-button": "Lisa ostukorvi",
+      "name": "Nimetus"
+  },
+  "navbar": {
+      "admin-button": "Admin vaatesse",
+      "cart-button": "Ostukorv",
+      "lang-en": "Inglise",
+      "lang-ee": "Eesti"
+  }
+}
