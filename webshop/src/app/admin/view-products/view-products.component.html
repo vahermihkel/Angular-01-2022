@@ -1,0 +1,11 @@
+<div *ngFor="let product of products">
+  <div>{{ product.id }}</div>
+  <div>{{ product.name }}</div>
+  <div>{{ product.price }}</div>
+  <div>{{ product.description }}</div>
+  <div>{{ product.category }}</div>
+  <img src="{{ product.imgSrc }}" alt="">
+  <br>
+  <button (click)="onDeleteProduct(product)">{{"admin.delete-button" | translate}}</button>
+  <br><br>
+</div>

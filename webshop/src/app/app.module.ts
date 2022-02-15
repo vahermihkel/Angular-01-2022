@@ -10,13 +10,26 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import { EditProductComponent } from './admin/edit-product/edit-product.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { ViewProductsComponent } from './admin/view-products/view-products.component';
+import { FormsModule } from '@angular/forms';
+import { CategoryComponent } from './admin/category/category.component';
+import { SingleProductComponent } from './single-product/single-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CartComponent,
-    NavbarComponent
+    NavbarComponent,
+    AddProductComponent,
+    EditProductComponent,
+    AdminHomeComponent,
+    ViewProductsComponent,
+    CategoryComponent,
+    SingleProductComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +41,8 @@ import { NavbarComponent } from './navbar/navbar.component';
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         }
-    })
+    }),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
