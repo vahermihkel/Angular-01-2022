@@ -1,10 +1,10 @@
 <div *ngFor="let product of products">
   <div>{{ product.cartProduct.name }} </div>
-  <div>{{ product.cartProduct.price }} €</div>
+  <div>{{ product.cartProduct.price | productPrice }}</div>
   <button (click)="onDecreaseQuantity(product)">-</button>
   <div>{{ product.quantity }} tk</div>
   <button (click)="onIncreaseQuantity(product)">+</button>
-  <div>Kokku: {{ product.cartProduct.price * product.quantity }} €</div>
+  <div>Kokku: {{ product.cartProduct.price * product.quantity | productPrice }}</div>
   <button (click)="onRemoveFromCart(product)">X</button>
   <br><br>
 </div>

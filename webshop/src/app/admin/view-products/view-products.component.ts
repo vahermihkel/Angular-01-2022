@@ -10,7 +10,10 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ViewProductsComponent implements OnInit {
 
-  products: Product[] = []
+  products: Product[] = [];
+  private originalProducts: Product[] = [];
+  searchedProduct: string = "";
+  descriptionWords: number = 2;
 
   constructor(private http: HttpClient,
     private _toastService: ToastService) { }
@@ -22,7 +25,15 @@ export class ViewProductsComponent implements OnInit {
         newArray.push(res[key]);
       }
       this.products = newArray;
+      this.originalProducts = newArray;
     });
+  }
+
+  onSearchProducts() {
+    this.products = this.originalProducts.filter(element => 
+        element.name.toLowerCase().indexOf(this.searchedProduct.toLowerCase()) > -1 ||
+        element.id.toString().indexOf(this.searchedProduct) > -1
+      );
   }
 
   onDeleteProduct(product: Product) {

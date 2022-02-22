@@ -9,6 +9,9 @@ import { Product } from '../models/product.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  // kuup2ev = new Date();
+  // numbriline = 0.5;
+  // suuremNUmber = 100312;
 
   products: Product[] = []
 

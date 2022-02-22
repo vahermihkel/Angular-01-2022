@@ -8,5 +8,8 @@
       "cart-button": "Cart",
       "lang-en": "English",
       "lang-ee": "Estonian"
+  },
+  "admin": {
+      "delete-button": "Delete"
   }
 }

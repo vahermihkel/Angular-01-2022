@@ -18,6 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { CategoryComponent } from './admin/category/category.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
+import { ProductPricePipe } from './pipes/product-price.pipe';
+import { WordCountPipe } from './pipes/word-count.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { ToastService, AngularToastifyModule } from 'angular-toastify';
     AdminHomeComponent,
     ViewProductsComponent,
     CategoryComponent,
-    SingleProductComponent
+    SingleProductComponent,
+    ProductPricePipe,
+    WordCountPipe
   ],
   imports: [
     BrowserModule, // ngFor, ngIf

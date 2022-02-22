@@ -1,13 +1,20 @@
+<!-- <div>{{ kuup2ev | date }}</div>
+<div>{{ kuup2ev | date:"dd.MM.yyyy HH:mm" }}</div>
+<div>{{ numbriline | percent }}</div>
+<div>{{ suuremNUmber | percent }}</div>
+<div>{{ numbriline | currency }}</div>
+<div>{{ suuremNUmber | currency:"CH" }}</div> -->
+
 <button (click)="onSortNameAsc()">Sorteeri A-Z</button>
 <button (click)="onSortNameDesc()">Sorteeri Z-A</button>
 <button (click)="onSortPriceAsc()">Sorteeri hind kasvavalt</button>
 <button (click)="onSortPriceDesc()">Sorteeri hind kahanevalt</button>
 
 <div *ngFor="let product of products">
-  <div>{{ product.name }}</div>
-  <div>{{ product.price }}</div>
+  <div>{{ product.name | titlecase }}</div>
+  <div>{{ product.price | productPrice }}</div>
   <img src="{{ product.imgSrc }}" alt="">
   <br>
-  <button (click)="onAddToCart(product)">{{"home.add-cart-button" | translate}}</button>
+  <button (click)="onAddToCart(product)">{{"home.add-cart-button" | translate | uppercase }}</button>
   <br><br>
 </div>

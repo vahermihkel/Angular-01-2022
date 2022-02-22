@@ -1,8 +1,13 @@
+<input [(ngModel)]="searchedProduct" (keyup)="onSearchProducts()" type="text">
+<br>
+<input type="range" min="0" max="50" [(ngModel)]="descriptionWords">
+<br><br>
+
 <div *ngFor="let product of products">
   <div>{{ product.id }}</div>
   <div>{{ product.name }}</div>
-  <div>{{ product.price }}</div>
-  <div>{{ product.description }}</div>
+  <div>{{ product.price | productPrice }}</div>
+  <div>{{ product.description | wordCount:descriptionWords }}</div>
   <div>{{ product.category }}</div>
   <img src="{{ product.imgSrc }}" alt="">
   <br>
@@ -11,3 +16,9 @@
 </div>
 
 <lib-toastify-toast-container></lib-toastify-toast-container>
+
+<!-- .ts -> .html  annan muutujaid ja nende väärtusi
+  {{ }}    ngFor massiiv     []
+
+  .html -> .ts     saadan funktsioonide abil ()   click-klahvivajutus
+-->
