@@ -24,6 +24,22 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  onSortNameAsc() {
+    this.products.sort((a,b) => a.name.localeCompare(b.name));
+  }
+
+  onSortNameDesc() {
+    this.products.sort((a,b) => b.name.localeCompare(a.name));
+  }
+
+  onSortPriceAsc() {
+    this.products.sort((a,b) => a.price - b.price);
+  }
+
+  onSortPriceDesc() {
+    this.products.sort((a,b) => b.price - a.price);
+  }
+
   // {name:"A", price: 5}
   // [] -> [{name:"A", price: 5}] -> [{name:"A", price: 5},{name:"A", price: 5}]
   // [] -> [{cartProduct:{name:"A", price: 5},quantity:1}] -> [{cartProduct:{name:"A", price: 5},quantity:2}]

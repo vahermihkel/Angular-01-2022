@@ -1,3 +1,8 @@
+<button (click)="onSortNameAsc()">Sorteeri A-Z</button>
+<button (click)="onSortNameDesc()">Sorteeri Z-A</button>
+<button (click)="onSortPriceAsc()">Sorteeri hind kasvavalt</button>
+<button (click)="onSortPriceDesc()">Sorteeri hind kahanevalt</button>
+
 <div *ngFor="let product of products">
   <div>{{ product.name }}</div>
   <div>{{ product.price }}</div>

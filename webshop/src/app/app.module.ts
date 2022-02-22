@@ -17,6 +17,7 @@ import { ViewProductsComponent } from './admin/view-products/view-products.compo
 import { FormsModule } from '@angular/forms';
 import { CategoryComponent } from './admin/category/category.component';
 import { SingleProductComponent } from './single-product/single-product.component';
+import { ToastService, AngularToastifyModule } from 'angular-toastify';
 
 @NgModule({
   declarations: [
@@ -32,19 +33,21 @@ import { SingleProductComponent } from './single-product/single-product.componen
     SingleProductComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
+    BrowserModule, // ngFor, ngIf
+    AppRoutingModule, // routerLink
+    HttpClientModule, // http
+    TranslateModule.forRoot({ // | translate
         loader: {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
         }
     }),
-    FormsModule
+    FormsModule, // ngForm
+    // ReactiveFormModule -- formGroup
+    AngularToastifyModule // <lib-toastify-toast-container>
   ],
-  providers: [],
+  providers: [ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

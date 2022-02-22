@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ToastService } from 'angular-toastify';
 import { Product } from 'src/app/models/product.model';
 
 @Component({
@@ -11,7 +12,8 @@ export class ViewProductsComponent implements OnInit {
 
   products: Product[] = []
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private _toastService: ToastService) { }
 
   ngOnInit(): void {
     this.http.get<Product[]>("https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json").subscribe(res => {
@@ -32,7 +34,7 @@ export class ViewProductsComponent implements OnInit {
     this.http.put(
       "https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json", 
       this.products).subscribe(()=>{
-      alert("Toode ID-ga " + product.id + " edukalt kustutatud!");
+        this._toastService.success("Toode ID-ga " + product.id + " edukalt kustutatud!");
     });
   }
 
