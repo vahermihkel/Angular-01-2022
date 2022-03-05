@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { CartProduct } from '../models/cart-product.model';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,8 +9,10 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  sumOfCart = 0;
 
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     const lang = localStorage.getItem("language");
@@ -17,6 +21,13 @@ export class NavbarComponent implements OnInit {
     } else {
       this.useLanguage("ee");
     }
+   
+    this.cartService.cartChanged.subscribe(products => {
+        this.sumOfCart = 0;
+        products.forEach(element => 
+          this.sumOfCart = this.sumOfCart + element.cartProduct.price * element.quantity);
+        });
+
   }
 
   useLanguage(language: string): void {

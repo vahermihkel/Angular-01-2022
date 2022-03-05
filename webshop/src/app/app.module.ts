@@ -14,12 +14,14 @@ import { AddProductComponent } from './admin/add-product/add-product.component';
 import { EditProductComponent } from './admin/edit-product/edit-product.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { ViewProductsComponent } from './admin/view-products/view-products.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CategoryComponent } from './admin/category/category.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 import { ToastService, AngularToastifyModule } from 'angular-toastify';
 import { ProductPricePipe } from './pipes/product-price.pipe';
 import { WordCountPipe } from './pipes/word-count.pipe';
+import { UniquePipe } from './pipes/unique.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { WordCountPipe } from './pipes/word-count.pipe';
     CategoryComponent,
     SingleProductComponent,
     ProductPricePipe,
-    WordCountPipe
+    WordCountPipe,
+    UniquePipe
   ],
   imports: [
     BrowserModule, // ngFor, ngIf
@@ -49,7 +52,9 @@ import { WordCountPipe } from './pipes/word-count.pipe';
     }),
     FormsModule, // ngForm
     // ReactiveFormModule -- formGroup
-    AngularToastifyModule // <lib-toastify-toast-container>
+    ReactiveFormsModule,
+    AngularToastifyModule,
+    NgbModule // <lib-toastify-toast-container>
   ],
   providers: [ToastService],
   bootstrap: [AppComponent]

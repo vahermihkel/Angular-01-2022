@@ -10,7 +10,7 @@ import { Product } from 'src/app/models/product.model';
 })
 export class ViewProductsComponent implements OnInit {
 
-  products: Product[] = [];
+  products: Product[] = []; 
   private originalProducts: Product[] = [];
   searchedProduct: string = "";
   descriptionWords: number = 2;

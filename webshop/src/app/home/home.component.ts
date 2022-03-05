@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CartProduct } from '../models/cart-product.model';
 import { Product } from '../models/product.model';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -9,13 +10,28 @@ import { Product } from '../models/product.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  // images = [700, 533, 807, 124].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  images = [
+    "https://picsum.photos/id/700/900/500",
+    "https://picsum.photos/id/533/900/500",
+    "https://picsum.photos/id/807/900/500",
+    "https://picsum.photos/id/124/900/500",
+  ];
+
+  // 1. ngFor kujule
+  // 2. Objektideks - URL, header, text, alt
+  // header1, header2, header3
+  // text1, text2, text3
+  // alt1, alt2, alt3
+
   // kuup2ev = new Date();
   // numbriline = 0.5;
   // suuremNUmber = 100312;
 
   products: Product[] = []
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     this.http.get<Product[]>("https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json").subscribe(res => {
@@ -50,8 +66,9 @@ export class HomeComponent implements OnInit {
     console.log(product);
     // kas on selline võti ostukorvis (sessionStorage)
     const cartProductsLS = sessionStorage.getItem("cart");
+    let cartProducts: CartProduct[] = [];
     if (cartProductsLS) {
-        const cartProducts: CartProduct[] = JSON.parse(cartProductsLS);
+        cartProducts = JSON.parse(cartProductsLS);
         // kas on selline selline toode olemas??? otsime järjekorranumbri alusel
         // sessionStorage-st saadud toodete seest
         // kui järjekorranumber on -1, järelikult sellist pole
@@ -61,14 +78,14 @@ export class HomeComponent implements OnInit {
         } else {
           cartProducts.push({cartProduct: product, quantity: 1});
         }
-        sessionStorage.setItem("cart", JSON.stringify(cartProducts));
         // kas on selline toode juba olemas --- suurenda quantity
         // kui ei ole sellist toodet olemas --- push()
 
     } else {
-    // ei ole sellist võtit
-      const cartProducts = [{cartProduct: product, quantity: 1}];
-      sessionStorage.setItem("cart", JSON.stringify(cartProducts));
+        // ei ole sellist võtit
+        cartProducts = [{cartProduct: product, quantity: 1}];
     }
+    sessionStorage.setItem("cart", JSON.stringify(cartProducts));
+    this.cartService.cartChanged.next(cartProducts);
   }
 }

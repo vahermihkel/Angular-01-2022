@@ -11,13 +11,18 @@ import { Product } from 'src/app/models/product.model';
 })
 export class AddProductComponent implements OnInit {
   categories: Category[] = [];
-  products: Product[] = [];
+  private products: Product[] = [];
   idEntered!: number;
   buttonDisabled: boolean = true;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.getCategoriesFromDatabase();
+    this.getProductsFromDatabase();
+  }
+
+  private getCategoriesFromDatabase() {
     this.http.get<Category[]>("https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/categories.json").subscribe(res => {
       const newArray = [];
       for (const key in res) {
@@ -25,7 +30,9 @@ export class AddProductComponent implements OnInit {
       }
       this.categories = newArray;
     });
+  }
 
+  private getProductsFromDatabase() {
     this.http.get<Product[]>("https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json").subscribe(res => {
       const newArray = [];
       for (const key in res) {

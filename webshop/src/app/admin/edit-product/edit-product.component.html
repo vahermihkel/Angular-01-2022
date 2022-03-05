@@ -1,1 +1,51 @@
-<p>edit-product works!</p>
+<!--            #form="ngForm" -->
+<form *ngIf="editProductForm" (ngSubmit)="onSubmit()" [formGroup]="editProductForm" > 
+  <label for="">ID</label> <br> 
+  <input 
+    placeholder="Toote kaheksakohaline ID" 
+    (keyup)="onCheckIdUniqueness()" 
+    [(ngModel)]="idEntered" 
+    min="10000000"
+    max="99999999"
+    formControlName="id" 
+    type="number" 
+    required> <br>
+  <label for="">Nimetus</label> <br> 
+  <input 
+    placeholder="Toote avalehe nimetus" 
+    formControlName="name" 
+    type="text" 
+    required> <br>
+  <label for="">Hind</label> <br> 
+  <input 
+    placeholder="Toote hind" 
+    formControlName="price" 
+    type="number" 
+    required> <br>
+  <label for="">Kirjeldus</label> <br> 
+  <input 
+    placeholder="Toote pikk kirjeldus" 
+    formControlName="description" 
+    type="text" 
+    required> <br>
+  <label for="">Pildi URL</label> <br> 
+  <input 
+    placeholder="Pildi URL aadress .jpg või .png lõpuga" 
+    formControlName="imgSrc" 
+    type="text" 
+    required> <br>
+  <label for="">Kategooria</label> <br> 
+  <select formControlName="category">
+    <option value="" disabled selected>Vali kategooria</option>
+    <option 
+      *ngFor="let category of categories" 
+      value="{{category.name}}">
+      {{category.name}}
+    </option>
+  </select>
+  <br>
+  <!-- <input placeholder="Toote kategooria" formControlName="category" type="text" required> <br> -->
+  <label for="">Kas aktiivne</label> <br> 
+  <input formControlName="isActive" type="checkbox"> <br>
+  <button [disabled]="editProductForm.invalid || buttonDisabled">Muuda toode</button>
+</form>

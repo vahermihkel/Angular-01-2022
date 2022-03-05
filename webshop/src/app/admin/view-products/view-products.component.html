@@ -12,6 +12,7 @@
   <img src="{{ product.imgSrc }}" alt="">
   <br>
   <button (click)="onDeleteProduct(product)">{{"admin.delete-button" | translate}}</button>
+  <button routerLink="/admin/muuda-toode/{{product.id}}">{{"admin.edit-button" | translate}}</button>
   <br><br>
 </div>
 

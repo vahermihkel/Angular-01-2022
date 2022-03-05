@@ -1,10 +1,35 @@
-<div *ngFor="let product of products">
-  <div>{{ product.cartProduct.name }} </div>
-  <div>{{ product.cartProduct.price | productPrice }}</div>
-  <button (click)="onDecreaseQuantity(product)">-</button>
-  <div>{{ product.quantity }} tk</div>
-  <button (click)="onIncreaseQuantity(product)">+</button>
-  <div>Kokku: {{ product.cartProduct.price * product.quantity | productPrice }}</div>
-  <button (click)="onRemoveFromCart(product)">X</button>
-  <br><br>
+<div class="cart-item" *ngFor="let product of products">
+  <div class="cart-item-name">{{ product.cartProduct.name }} </div>
+  <div class="cart-item-price">{{ product.cartProduct.price | productPrice }}</div>
+  <div>
+    <img class="cart-item-button" src="assets/minus.png" (click)="onDecreaseQuantity(product)">
+    <span class="cart-item-quantity">{{ product.quantity }} tk</span>
+    <img class="cart-item-button" src="assets/plus.png" (click)="onIncreaseQuantity(product)">
+  </div>
+  <div class="cart-item-total">
+    {{ product.cartProduct.price * product.quantity | productPrice }}
+  </div>
+  <img class="cart-item-delete" src="assets/trash-can.png" (click)="onRemoveFromCart(product)" />
+</div>
+
+<!-- <button (click)="showParcelMachinesByCounty('Harju maakond')">Harju pakiautomaadid</button>
+<button (click)="showParcelMachinesByCounty('Viljandi maakond')">Viljandi pakiautomaadid</button>
+<button (click)="showParcelMachinesByCounty('Tartu maakond')">Tartumaa pakiautomaadid</button> -->
+<div *ngIf="selectedPMachine === ''">
+  <select (change)="showParcelMachinesByCounty()" [(ngModel)]="selectedCounty">
+    <option value="" disabled>Täpsusta maakond</option>
+    <option *ngFor="let county of originalParcelMachines | unique" value="{{county}}">
+      {{ county }}
+    </option>
+  </select>
+  <select [(ngModel)]="selectedPMachine">
+    <option *ngFor="let pMachine of parcelMachines" value="{{pMachine.NAME}}">
+      {{ pMachine.NAME }}
+    </option>
+  </select>
+</div>
+
+<div *ngIf="selectedPMachine">
+  Valitud pakiautomaat: {{ selectedPMachine}}
+  <button (click)="deleteSelectedPMachine()">X</button>
 </div>

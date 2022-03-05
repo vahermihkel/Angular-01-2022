@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: "admin", children: [
     { path: "", component: AdminHomeComponent },
     { path: "lisa-toode", component: AddProductComponent },
-    { path: "muuda-toode", component: EditProductComponent },
+    { path: "muuda-toode/:productId", component: EditProductComponent },
     { path: "vaata-tooteid", component: ViewProductsComponent },
     { path: "kategooria", component: CategoryComponent },
   ] },
