@@ -18,7 +18,7 @@
 <div *ngIf="selectedPMachine === ''">
   <select (change)="showParcelMachinesByCounty()" [(ngModel)]="selectedCounty">
     <option value="" disabled>Täpsusta maakond</option>
-    <option *ngFor="let county of originalParcelMachines | unique" value="{{county}}">
+    <option *ngFor="let county of originalParcelMachines | unique:'A1_NAME'" value="{{county}}">
       {{ county }}
     </option>
   </select>

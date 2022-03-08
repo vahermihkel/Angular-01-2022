@@ -22,6 +22,8 @@ import { ProductPricePipe } from './pipes/product-price.pipe';
 import { WordCountPipe } from './pipes/word-count.pipe';
 import { UniquePipe } from './pipes/unique.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SingleProductComponent,
     ProductPricePipe,
     WordCountPipe,
-    UniquePipe
+    UniquePipe,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule, // ngFor, ngIf
@@ -56,7 +60,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AngularToastifyModule,
     NgbModule // <lib-toastify-toast-container>
   ],
-  providers: [ToastService],
+  providers: [ToastService, UniquePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

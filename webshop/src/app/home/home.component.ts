@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CartProduct } from '../models/cart-product.model';
 import { Product } from '../models/product.model';
+import { UniquePipe } from '../pipes/unique.pipe';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -28,10 +29,13 @@ export class HomeComponent implements OnInit {
   // numbriline = 0.5;
   // suuremNUmber = 100312;
 
-  products: Product[] = []
+  products: Product[] = []; // 3. muudan filter() -- kellel on samasugune kategooria nagu valitud
+  originalProducts: Product[] = []; // 1.et saada originaali tagasi et uuesti filterdada
+  categories: string[] = []; // 2.kuvan välja ---> võtan iga toote küljest (originaalmassiivist)
 
   constructor(private http: HttpClient,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private uniquePipe: UniquePipe) { }
 
   ngOnInit(): void {
     this.http.get<Product[]>("https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json").subscribe(res => {
@@ -39,8 +43,20 @@ export class HomeComponent implements OnInit {
       for (const key in res) {
         newArray.push(res[key]);
       }
-      this.products = newArray;
+      this.originalProducts = newArray;
+      this.products = this.originalProducts.slice();
+
+      // this.categories = this.originalProducts.map(element => element.category);
+      this.categories = this.uniquePipe.transform(this.originalProducts,"category");
     });
+  }
+
+  onSelectCategory(category: string) {
+    if (category == "all") {
+      this.products = this.originalProducts.slice();
+    } else {
+      this.products = this.originalProducts.filter(element => element.category == category);
+    }
   }
 
   onSortNameAsc() {
@@ -72,7 +88,8 @@ export class HomeComponent implements OnInit {
         // kas on selline selline toode olemas??? otsime järjekorranumbri alusel
         // sessionStorage-st saadud toodete seest
         // kui järjekorranumber on -1, järelikult sellist pole
-        const index = cartProducts.findIndex(element => element.cartProduct.id === product.id);
+        const index = cartProducts.findIndex(element => 
+          element.cartProduct.id === product.id);
         if (index !== -1) {
           cartProducts[index].quantity++;
         } else {

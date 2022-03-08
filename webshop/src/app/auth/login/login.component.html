@@ -1,0 +1,9 @@
+<div>{{ error }}</div>
+
+<form (ngSubmit)="onLogin(form)" #form="ngForm">
+  <label>E-mail</label> <br>
+  <input ngModel name="email" type="text"> <br>
+  <label>Password</label> <br>
+  <input ngModel name="password" type="password"> <br>
+  <button>Logi sisse</button>
+</form>
