@@ -1,0 +1,6 @@
+<div>{{ product.name | titlecase }}</div>
+  <div>{{ product.price | productPrice }}</div>
+  <img src="{{ product.imgSrc }}" alt="">
+  <br>
+  <button (click)="onAddToCart(product)">{{"home.add-cart-button" | translate | uppercase }}</button>
+  <br><br>

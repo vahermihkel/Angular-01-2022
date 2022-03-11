@@ -24,6 +24,10 @@ import { UniquePipe } from './pipes/unique.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { ParcelMachineComponent } from './cart/parcel-machine/parcel-machine.component';
+import { CarouselComponent } from './home/carousel/carousel.component';
+import { ProductCardComponent } from './home/product-card/product-card.component';
+import { SortButtonsComponent } from './home/sort-buttons/sort-buttons.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,11 @@ import { SignupComponent } from './auth/signup/signup.component';
     WordCountPipe,
     UniquePipe,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ParcelMachineComponent,
+    CarouselComponent,
+    ProductCardComponent,
+    SortButtonsComponent
   ],
   imports: [
     BrowserModule, // ngFor, ngIf

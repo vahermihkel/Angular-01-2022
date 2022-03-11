@@ -12,24 +12,8 @@
   <img class="cart-item-delete" src="assets/trash-can.png" (click)="onRemoveFromCart(product)" />
 </div>
 
-<!-- <button (click)="showParcelMachinesByCounty('Harju maakond')">Harju pakiautomaadid</button>
-<button (click)="showParcelMachinesByCounty('Viljandi maakond')">Viljandi pakiautomaadid</button>
-<button (click)="showParcelMachinesByCounty('Tartu maakond')">Tartumaa pakiautomaadid</button> -->
-<div *ngIf="selectedPMachine === ''">
-  <select (change)="showParcelMachinesByCounty()" [(ngModel)]="selectedCounty">
-    <option value="" disabled>Täpsusta maakond</option>
-    <option *ngFor="let county of originalParcelMachines | unique:'A1_NAME'" value="{{county}}">
-      {{ county }}
-    </option>
-  </select>
-  <select [(ngModel)]="selectedPMachine">
-    <option *ngFor="let pMachine of parcelMachines" value="{{pMachine.NAME}}">
-      {{ pMachine.NAME }}
-    </option>
-  </select>
-</div>
+<div *ngIf="products.length === 0">Ostukorv on tühi</div>
 
-<div *ngIf="selectedPMachine">
-  Valitud pakiautomaat: {{ selectedPMachine}}
-  <button (click)="deleteSelectedPMachine()">X</button>
-</div>
+<button (click)="onPay()">MAKSMA</button>
+
+<app-parcel-machine *ngIf="products.length > 0"></app-parcel-machine>

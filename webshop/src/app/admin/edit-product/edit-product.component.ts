@@ -1,10 +1,12 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
+import { CategoryService } from 'src/app/services/category.service';
+import { IdUniquenessService } from 'src/app/services/id-uniqueness.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -21,9 +23,11 @@ export class EditProductComponent implements OnInit {
   product!: Product;
   index!: number;
 
-  constructor(private http: HttpClient,
+  constructor(private productService: ProductService,
     private route: ActivatedRoute,
-    private _toastService: ToastService) { }
+    private categoryService: CategoryService,
+    private _toastService: ToastService,
+    private idUniqService: IdUniquenessService) { }
 
   ngOnInit(): void {
     this.getCategoriesFromDatabase();
@@ -36,7 +40,7 @@ export class EditProductComponent implements OnInit {
   }
 
   private getCategoriesFromDatabase() {
-    this.http.get<Category[]>("https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/categories.json").subscribe(res => {
+    this.categoryService.getCategories().subscribe(res => {
       const newArray = [];
       for (const key in res) {
         newArray.push(res[key]);
@@ -46,7 +50,7 @@ export class EditProductComponent implements OnInit {
   }
 
   private getProductFromDatabase() {
-    this.http.get<Product[]>("https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json").subscribe(res => {
+    this.productService.getProducts().subscribe(res => {
       const newArray = [];
       for (const key in res) {
         newArray.push(res[key]);
@@ -77,19 +81,14 @@ export class EditProductComponent implements OnInit {
 
   onCheckIdUniqueness() {
     if (this.idEntered && this.idEntered.toString().length === 8) {
-      const index = this.products.findIndex(element => element.id === this.idEntered);
-      if (index === -1 || this.product.id === this.idEntered) {
-        this.buttonDisabled = false;
-      } else {
-        this.buttonDisabled = true;
-      }
+      this.buttonDisabled = this.idUniqService.onCheckIdUniqueness(
+              this.idEntered, this.products, this.product);
     }
   }
 
   onSubmit() {
     this.products[this.index] = this.editProductForm.value
-    this.http.put("https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json",
-      this.products).subscribe( () =>
+    this.productService.replaceProducts(this.products).subscribe( () =>
         {
           window.location.href="/admin/vaata-tooteid"
           this._toastService.success('Toode edukalt muudetud')

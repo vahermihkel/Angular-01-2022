@@ -10,12 +10,19 @@ export class CartService {
 
   constructor() { }
 
-  getCartProducts() {
+  getCartProducts(): CartProduct[] {
     const productsLS = sessionStorage.getItem("cart");
     if (productsLS) {
       const products: CartProduct[] = JSON.parse(productsLS);
       return products;
     }
     return [];
+  }
+
+  calculateCartSum(products: CartProduct[]): number {
+    let sumOfCart = 0;
+    products.forEach(element => 
+      sumOfCart = sumOfCart + element.cartProduct.price * element.quantity);
+    return sumOfCart;
   }
 }

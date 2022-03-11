@@ -1,42 +1,4 @@
-<ngb-carousel *ngIf="images" class="carousel-wrapper">
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img src="{{images[0]}}" alt="Random first slide">
-    </div>
-    <div class="carousel-caption">
-      <h3>10 seconds between slides...</h3>
-      <p>This carousel uses customized default values.</p>
-    </div>
-  </ng-template>
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img [src]="images[1]" alt="Random second slide">
-    </div>
-    <div class="carousel-caption">
-      <h3>No mouse events...</h3>
-      <p>This carousel doesn't pause or resume on mouse events</p>
-    </div>
-  </ng-template>
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img [src]="images[2]"  alt="Random third slide">
-    </div>
-    <div class="carousel-caption">
-      <h3>No keyboard...</h3>
-      <p>This carousel uses customized default values.</p>
-    </div>
-  </ng-template>
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img [src]="images[3]" alt="Random fourth slide">
-    </div>
-    <div class="carousel-caption">
-      <h3>And no wrap after last slide.</h3>
-      <p>This carousel uses customized default values.</p>
-    </div>
-  </ng-template>
-</ngb-carousel>
-
+<app-carousel></app-carousel>
 
 <!-- <div>{{ kuup2ev | date }}</div>
 <div>{{ kuup2ev | date:"dd.MM.yyyy HH:mm" }}</div>
@@ -50,16 +12,8 @@
   <div *ngFor="let category of categories" (click)="onSelectCategory(category)">{{category}}</div>  
 </div>
 
-<button (click)="onSortNameAsc()">Sorteeri A-Z</button>
-<button (click)="onSortNameDesc()">Sorteeri Z-A</button>
-<button (click)="onSortPriceAsc()">Sorteeri hind kasvavalt</button>
-<button (click)="onSortPriceDesc()">Sorteeri hind kahanevalt</button>
+<app-sort-buttons [products]="products"></app-sort-buttons>
 
-<div *ngFor="let product of products">
-  <div>{{ product.name | titlecase }}</div>
-  <div>{{ product.price | productPrice }}</div>
-  <img src="{{ product.imgSrc }}" alt="">
-  <br>
-  <button (click)="onAddToCart(product)">{{"home.add-cart-button" | translate | uppercase }}</button>
-  <br><br>
+<div *ngFor="let prod of products">
+  <app-product-card [product]="prod"></app-product-card>
 </div>

@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastService } from 'angular-toastify';
 import { Product } from 'src/app/models/product.model';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-view-products',
@@ -15,11 +15,11 @@ export class ViewProductsComponent implements OnInit {
   searchedProduct: string = "";
   descriptionWords: number = 2;
 
-  constructor(private http: HttpClient,
+  constructor(private productService: ProductService,
     private _toastService: ToastService) { }
 
   ngOnInit(): void {
-    this.http.get<Product[]>("https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json").subscribe(res => {
+    this.productService.getProducts().subscribe(res => {
       const newArray = [];
       for (const key in res) {
         newArray.push(res[key]);
@@ -42,9 +42,7 @@ export class ViewProductsComponent implements OnInit {
     const index = this.products.indexOf(product);
     this.products.splice(index,1);
     // uuesti Firebase-i lisada
-    this.http.put(
-      "https://webshop-01-2022-default-rtdb.europe-west1.firebasedatabase.app/products.json", 
-      this.products).subscribe(()=>{
+    this.productService.replaceProducts(this.products).subscribe(()=>{
         this._toastService.success("Toode ID-ga " + product.id + " edukalt kustutatud!");
     });
   }

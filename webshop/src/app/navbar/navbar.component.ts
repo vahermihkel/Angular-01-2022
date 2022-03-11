@@ -30,10 +30,8 @@ export class NavbarComponent implements OnInit {
     }
    
     this.cartService.cartChanged.subscribe(products => {
-        this.sumOfCart = 0;
-        products.forEach(element => 
-          this.sumOfCart = this.sumOfCart + element.cartProduct.price * element.quantity);
-        });
+       this.sumOfCart = this.cartService.calculateCartSum(products);
+    });
 
   }
 
