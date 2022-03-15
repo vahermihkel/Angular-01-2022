@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/product.model';
 import { UniquePipe } from '../pipes/unique.pipe';
+import { AuthService } from '../services/auth.service';
 import { ProductService } from '../services/product.service';
 
 @Component({
@@ -17,9 +18,11 @@ export class HomeComponent implements OnInit {
   products: Product[] = []; // 3. muudan filter() -- kellel on samasugune kategooria nagu valitud
   originalProducts: Product[] = []; // 1.et saada originaali tagasi et uuesti filterdada
   categories: string[] = []; // 2.kuvan välja ---> võtan iga toote küljest (originaalmassiivist)
+  isLoggedIn = false;
 
   constructor(private productService: ProductService,
-    private uniquePipe: UniquePipe) { }
+    private uniquePipe: UniquePipe,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(res => {
@@ -33,6 +36,10 @@ export class HomeComponent implements OnInit {
       // this.categories = this.originalProducts.map(element => element.category);
       this.categories = this.uniquePipe.transform(this.originalProducts,"category");
     });
+
+    this.authService.loggedInChanged.subscribe(() => { // <--- Subject()
+      this.isLoggedIn = sessionStorage.getItem("userData") !== null; // <--- BehaviorSubject
+    })
   }
 
   onSelectCategory(category: string) {

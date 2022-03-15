@@ -1,0 +1,24 @@
+.active {
+  border: 1px solid green;
+}
+
+.inactive {
+  border: 1px solid red;
+}
+
+.active, .inactive {
+  margin: 10px 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.active img, .inactive img {
+  width: 150px;
+  height: 150px;
+}
+
+.product {
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+}

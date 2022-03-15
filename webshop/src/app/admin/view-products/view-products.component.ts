@@ -47,4 +47,9 @@ export class ViewProductsComponent implements OnInit {
     });
   }
 
+  changeActive(product: Product) {
+    product.isActive = !product.isActive;
+    this.productService.replaceProducts(this.products).subscribe();
+  }
+
 }

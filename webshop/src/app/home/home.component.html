@@ -15,5 +15,9 @@
 <app-sort-buttons [products]="products"></app-sort-buttons>
 
 <div *ngFor="let prod of products">
-  <app-product-card [product]="prod"></app-product-card>
+  <app-product-card 
+    *ngIf="prod.isActive || isLoggedIn" 
+    [product]="prod"
+    [loggedIn]="isLoggedIn"
+    ></app-product-card>
 </div>

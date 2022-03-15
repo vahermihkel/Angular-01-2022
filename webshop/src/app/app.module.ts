@@ -28,6 +28,8 @@ import { ParcelMachineComponent } from './cart/parcel-machine/parcel-machine.com
 import { CarouselComponent } from './home/carousel/carousel.component';
 import { ProductCardComponent } from './home/product-card/product-card.component';
 import { SortButtonsComponent } from './home/sort-buttons/sort-buttons.component';
+import { ShopsComponent } from './shops/shops.component';
+import { AutosizeDirective } from './directives/autosize.directive';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { SortButtonsComponent } from './home/sort-buttons/sort-buttons.component
     ParcelMachineComponent,
     CarouselComponent,
     ProductCardComponent,
-    SortButtonsComponent
+    SortButtonsComponent,
+    ShopsComponent,
+    AutosizeDirective
   ],
   imports: [
     BrowserModule, // ngFor, ngIf

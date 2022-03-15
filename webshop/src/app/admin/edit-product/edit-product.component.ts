@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ToastService } from 'angular-toastify';
 import { Category } from 'src/app/models/category.model';
@@ -68,11 +68,11 @@ export class EditProductComponent implements OnInit {
   private initForm() {
     this.idEntered = this.product.id;
     this.editProductForm = new FormGroup({
-      id: new FormControl(this.product.id),
-      name: new FormControl(this.product.name),
+      id: new FormControl(this.product.id,Validators.required),
+      name: new FormControl(this.product.name, [Validators.required, Validators.email]),
       price: new FormControl(this.product.price),
       description: new FormControl(this.product.description),
-      imgSrc: new FormControl(this.product.imgSrc),
+      imgSrc: new FormControl(this.product.imgSrc, Validators.pattern(/^\S*$/)),
       category: new FormControl(this.product.category),
       isActive: new FormControl(this.product.isActive),
     });

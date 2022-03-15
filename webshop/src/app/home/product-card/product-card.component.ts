@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
+  @Input() loggedIn = false;
 
   constructor(private cartService: CartService) { }
 

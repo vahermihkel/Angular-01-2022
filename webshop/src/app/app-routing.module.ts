@@ -10,6 +10,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { CartComponent } from './cart/cart.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
+import { ShopsComponent } from './shops/shops.component';
 import { SingleProductComponent } from './single-product/single-product.component';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: "ostukorv", component: CartComponent },
   { path: "toode", component: SingleProductComponent },
   { path: "logi-sisse", component: LoginComponent },
+  { path: "poed", component: ShopsComponent },
   { path: "admin", canActivateChild:[AuthGuard], children: [
     { path: "", component: AdminHomeComponent },
     { path: "lisa-toode", component: AddProductComponent },
