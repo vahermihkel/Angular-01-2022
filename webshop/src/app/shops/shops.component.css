@@ -2,7 +2,7 @@
   position: absolute;
   top: 120px;
   left: 0;
-  right: 0;
+  right: 150px;
   bottom: 0;
   margin: 30px;
 }
@@ -14,4 +14,10 @@
 
 #map {
   height: 100%;
+}
+
+.nupud {
+  position: absolute;
+  top: 150px;
+  right: 30px;
 }

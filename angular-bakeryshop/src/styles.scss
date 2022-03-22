@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+  padding-top: 140px;
+}
+
+/*TODO: Set the font weight of the first table column to bold*/
+
+tbody > tr :first-child {
+  font-weight: bold;
+}
+
+tbody tr :last-child {
+  font-weight: unset;
+}

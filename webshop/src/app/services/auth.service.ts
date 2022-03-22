@@ -21,6 +21,8 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
+  // 8086F28474E2A1C49C54B165B4ACB33D1AA5
+
   private tokenExpirationTimer: any;
   private route= 'https://identitytoolkit.googleapis.com/v1/accounts:';
   private key = 'AIzaSyBH9ePbaGz6wwIV6FS2AK4O5NlcJ6g05i8';

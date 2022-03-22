@@ -27,7 +27,9 @@ const routes: Routes = [
     { path: "kategooria", component: CategoryComponent },
     { path: "registreeru", component: SignupComponent },
   ] },
-  
+  // { path: "**", component: NotFoundComponent },
+  // { path: "**", redirectTo: "" },
+
 ];
 
 @NgModule({
