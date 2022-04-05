@@ -37,11 +37,14 @@
     required>
   </textarea> <br>
   <label for="">Pildi URL</label> <br> 
-  <input 
+  <!-- <input 
     placeholder="Pildi URL aadress .jpg või .png lõpuga" 
     ngModel name="imgSrc" 
     type="text" 
-    required> <br>
+    required> <br> -->
+    <input ngModel name="imgSrc" (change)="handleFileInput($event)" type="file">
+    <button type="button" *ngIf="this.selectedFile" (click)="sendPictureToDb()">Saada pilt andmebaasi</button>
+    <br>
   <label for="">Kategooria</label> <br> 
   <select ngModel name="category">
     <option value="" disabled selected>Vali kategooria</option>
@@ -55,5 +58,7 @@
   <!-- <input placeholder="Toote kategooria" ngModel name="category" type="text" required> <br> -->
   <label for="">Kas aktiivne</label> <br> 
   <input ngModel name="isActive" type="checkbox"> <br>
-  <button [disabled]="addProductForm.invalid || buttonDisabled">Sisesta uus toode</button>
+  <button type="submit" [disabled]="addProductForm.invalid || buttonDisabled">Sisesta uus toode</button>
 </form>
+
+<img src="{{'https://firebasestorage.googleapis.com/v0/b/webshop-01-2022.appspot.com/o/images%2Fminus.png?alt=media&token=32c7e822-3935-4de2-ae99-5f743a33431f'}}" alt="">

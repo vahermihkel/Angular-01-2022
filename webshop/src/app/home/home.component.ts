@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Product } from '../models/product.model';
 import { UniquePipe } from '../pipes/unique.pipe';
 import { AuthService } from '../services/auth.service';
@@ -35,6 +35,13 @@ export class HomeComponent implements OnInit {
 
       // this.categories = this.originalProducts.map(element => element.category);
       this.categories = this.uniquePipe.transform(this.originalProducts,"category");
+    
+      setTimeout(()=>{
+        if (sessionStorage['scrollPos']) {
+          window.scrollTo(0, sessionStorage['scrollPos']);
+          sessionStorage['scrollPos'] = 0;
+        }
+      },500)
     });
 
     this.authService.loggedInChanged.subscribe(() => { // <--- Subject()
@@ -49,5 +56,9 @@ export class HomeComponent implements OnInit {
       this.products = this.originalProducts.filter(element => element.category == category);
     }
   }
+
+  // @HostListener('window:scroll', ['$event']) onScrollEvent($event: Event){
+//    sessionStorage['scrollPos'] = window.scrollY
+  // }
 
 }

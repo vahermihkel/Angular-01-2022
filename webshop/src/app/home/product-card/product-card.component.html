@@ -1,8 +1,10 @@
 <div [ngClass]="{active: loggedIn && product.isActive, inactive: loggedIn && !product.isActive}">
   <button class="change-button" *ngIf="loggedIn" routerLink="/admin/muuda-toode/{{product.id}}">MUUDA</button>
-  <div>{{ product.name | titlecase }}</div>
-  <div>{{ product.price | productPrice }}</div>
-  <img src="{{ product.imgSrc }}" alt="">
+  <div (click)="onViewProduct(product.id)">
+    <div>{{ product.name | titlecase }}</div>
+    <div>{{ product.price | productPrice }}</div>
+    <img src="{{ product.imgSrc }}" alt="">
+  </div>
   <br>
   <button (click)="onAddToCart(product)">{{"home.add-cart-button" | translate | uppercase }}</button>
   <br><br>

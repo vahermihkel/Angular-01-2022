@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartProduct } from 'src/app/models/cart-product.model';
 import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -12,7 +13,8 @@ export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
   @Input() loggedIn = false;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -46,6 +48,12 @@ export class ProductCardComponent implements OnInit {
     }
     sessionStorage.setItem("cart", JSON.stringify(cartProducts));
     this.cartService.cartChanged.next(cartProducts);
+  }
+
+  onViewProduct(productId: number) {
+    this.router.navigateByUrl("toode");
+    sessionStorage['scrollPos'] = window.scrollY;
+    // sessionStorage.setItem("scrollPos", window.scrollY.toString());
   }
 
 }

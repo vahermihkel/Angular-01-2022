@@ -4,6 +4,7 @@ import { Category } from 'src/app/models/category.model';
 import { Product } from 'src/app/models/product.model';
 import { CategoryService } from 'src/app/services/category.service';
 import { IdUniquenessService } from 'src/app/services/id-uniqueness.service';
+import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -16,10 +17,12 @@ export class AddProductComponent implements OnInit {
   private products: Product[] = [];
   idEntered!: number;
   buttonDisabled: boolean = true;
+  selectedFile!: File;
 
   constructor(private productService: ProductService,
     private categoryService: CategoryService,
-    private idUniqService: IdUniquenessService) { }
+    private idUniqService: IdUniquenessService,
+    private imageUpload: ImageUploadService) { }
 
   ngOnInit(): void {
     this.getCategoriesFromDatabase();
@@ -54,14 +57,37 @@ export class AddProductComponent implements OnInit {
       // } else {
       //   this.buttonDisabled = true;
       // }
-      this.idUniqService.onCheckIdUniqueness(this.idEntered,
+      this.buttonDisabled = this.idUniqService.onCheckIdUniqueness(this.idEntered,
         this.products)
     }
   }
 
+  handleFileInput(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  sendPictureToDb() {
+    this.imageUpload.uploadPicture(this.selectedFile);
+  }
+
   onSubmit(addProductForm: NgForm): void {
+    console.log(addProductForm.value);
+    const url = this.imageUpload.uploadedPictureUrl;
+    if (url === "") {
+      const isOk = confirm("Oled lisamas toodet ilma pildita, kas oled kindel?");
+      if (isOk) {
+        console.log("lähen edasi");
+      } else {
+        console.log("katkestati");
+      }
+    }
     if (addProductForm.valid) {
-      this.productService.addProduct(addProductForm.value).subscribe(()=>{
+      const val = addProductForm.value;
+      const newProduct = new Product(
+          val.id,val.name, val.price, url, 
+          val.description, val.category, val.isActive
+        );
+      this.productService.addProduct(newProduct).subscribe(()=>{
         addProductForm.reset();
         this.getProductsFromDatabase();
       });
